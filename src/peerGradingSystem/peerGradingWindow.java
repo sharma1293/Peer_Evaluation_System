@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import peerGradingSystem.userInputSelectionWindow;
+//import peerGradingSystem.userInputSelectionWindow;
 
 
 
@@ -25,11 +25,11 @@ public class peerGradingWindow extends JPanel {
 	//    private boolean DEBUG = false;
 
 
-	public peerGradingWindow() {
+	public peerGradingWindow(studentList currentList) {
 		super(new GridLayout(1,0));
 
 		//Here change the student list value
-		JTable table = new JTable(new MyTableModel(new studentList()));
+		JTable table = new JTable(new MyTableModel(currentList));
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
 
@@ -41,39 +41,6 @@ public class peerGradingWindow extends JPanel {
 
 		//Add the scroll pane to this panel.
 		add(scrollPane);
-	}
-
-
-	public class student{
-		private String fullName;
-		private Integer marks;
-
-		public student(String fullName, Integer marks){
-			this.fullName = fullName;
-			this.marks = marks;
-		}
-		public Integer getMarks() {
-			return marks;
-		}
-		public String getFullName() {
-			return fullName;
-		}
-
-	}
-
-	public class studentList{
-		private ArrayList<student> students;
-
-		public studentList() {
-			students = new ArrayList<student>();
-		}
-		public void add(student currentStudent) {
-			students.add(currentStudent);
-		}
-		public ArrayList<student> getStudentsList() {
-			return students;
-		}
-
 	}
 
 	public void setUpMarksColumn(JTable table,
@@ -100,7 +67,7 @@ public class peerGradingWindow extends JPanel {
 		private List<student> data;// = new ArrayList();
 
 		public MyTableModel(studentList currentList){
-			this.data = currentList.getStudentsList();
+			data = currentList.getStudentsList();
 		}
 		public int getColumnCount() {
 			return columnNames.length;
@@ -174,6 +141,14 @@ public class peerGradingWindow extends JPanel {
 			//            }
 
 			//            data[row][col] = value;
+//			Object temp = null; 
+			if (col == 0) { 
+				data.get(row).setFullName((String)value); 
+			} 
+			else if (col == 1) { 
+				data.get(row).setMarks((int)value); 
+			} 
+			
 			fireTableCellUpdated(row, col);
 
 			//            if (DEBUG) {
@@ -215,12 +190,20 @@ public class peerGradingWindow extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		userInputSelectionWindow currentUserSelectionWindow = new userInputSelectionWindow();
-		currentUserSelectionWindow.getBoolPreviousScores();
-		currentUserSelectionWindow.getNumTeammatesSelected();
-
+		boolean previousValues = currentUserSelectionWindow.getBoolPreviousScores();
+		int numTeamates = currentUserSelectionWindow.getNumTeammatesSelected();
+		studentList currentList = new studentList();
+		//Initialize the data
+//		initializeGrades()
+		currentList.initStudentList(numTeamates, previousValues);
+		
+		
 		//Create and set up the content pane.
 		
-		peerGradingWindow newContentPane = new peerGradingWindow();
+		peerGradingWindow newContentPane = new peerGradingWindow(currentList);
+		
+		//Write code to pass the parameters to pane
+//		student aa = newContentPane.new student("Sid",4);
 		newContentPane.setOpaque(true); //content panes must be opaque
 		frame.setContentPane(newContentPane);
 
