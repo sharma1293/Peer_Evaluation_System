@@ -1,15 +1,19 @@
 package peerGradingSystem;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.io.ObjectInputStream.GetField;
-import java.util.ArrayList;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+//import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,10 +30,11 @@ public class peerGradingWindow extends JPanel {
 
 
 	public peerGradingWindow(studentList currentList) {
-		super(new GridLayout(1,0));
+		super(new GridLayout(2,0));
 
 		//Here change the student list value
-		JTable table = new JTable(new MyTableModel(currentList));
+		MyTableModel currentModel = new MyTableModel(currentList);
+		JTable table = new JTable(currentModel);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
 
@@ -40,7 +45,27 @@ public class peerGradingWindow extends JPanel {
 		setUpMarksColumn(table, table.getColumnModel().getColumn(1));
 
 		//Add the scroll pane to this panel.
-		add(scrollPane);
+//		add(scrollPane);
+		JButton submitButton = new JButton("Submit");
+//		Dimension d = new Dimension(30, 30);
+		submitButton.setSize(new Dimension(10, 10));
+//		submitButton.setMargin(new Insets(-10, -10, -10, -10));
+		submitButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				currentList.calculateNormalisedMarks();
+				currentModel.fireTableDataChanged();
+				
+			}
+		});
+//		add(submitButton);
+		setLayout(new BorderLayout());
+		add(scrollPane, BorderLayout.CENTER);
+		add(submitButton, BorderLayout.SOUTH);
+//		add(BorderLayout.PAGE_END, submitButton);
 	}
 
 	public void setUpMarksColumn(JTable table,
@@ -62,7 +87,7 @@ public class peerGradingWindow extends JPanel {
 
 	public class MyTableModel extends AbstractTableModel {
 		private String[] columnNames = {"Name",
-		"Marks"};
+		"Marks","Normalised Marks"};
 
 		private List<student> data;// = new ArrayList();
 
@@ -97,6 +122,9 @@ public class peerGradingWindow extends JPanel {
 			else if (col == 1) { 
 				temp = data.get(row).getMarks(); 
 			} 
+			else if (col == 2) { 
+				temp = data.get(row).getNormalisedMarks(); 
+			}
 			//            else if (col == 2) { 
 			//               temp = new Double(data.get(row).getPrice()); 
 			//            } 
@@ -121,10 +149,10 @@ public class peerGradingWindow extends JPanel {
 		public boolean isCellEditable(int row, int col) {
 			//Note that the data/cell address is constant,
 			//no matter where the cell appears onscreen.
-			if (col  == 0) {
-				return false;
-			} else {
+			if (col  == 1) {
 				return true;
+			} else {
+				return false;
 			}
 		}
 
@@ -147,6 +175,9 @@ public class peerGradingWindow extends JPanel {
 			} 
 			else if (col == 1) { 
 				data.get(row).setMarks((int)value); 
+			}
+			else if (col == 2) { 
+				data.get(row).setNormalisedMarks((int)value); 
 			} 
 			
 			fireTableCellUpdated(row, col);

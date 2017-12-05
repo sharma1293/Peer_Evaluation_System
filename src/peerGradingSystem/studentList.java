@@ -27,7 +27,26 @@ public class studentList{
 			student currentStudent = new student(studentNames[i],currentMarks);
 			students.add(currentStudent);
 		}
+	}
+	
+
+public void calculateNormalisedMarks(){//studentList currentList
+	//ArrayList<student> currentArrayList = currentList.getStudentsList();
+	int totalMarks = 0;
+	for(int i= 0; i<students.size(); i++){
+		
+		totalMarks = totalMarks+students.get(i).getMarks();
 		
 	}
+	for(int i= 0; i<students.size(); i++){
+		
+		//totalMarks = totalMarks+currentArrayList.get(i).getMarks();
+		students.get(i).setNormalisedMarks((((float)(students.get(i).getMarks()))/totalMarks));
+		System.out.println("The value has been changed to:"+ students.get(i).getNormalisedMarks());
+		
+	}
+	}
+	
+	
 
 }
