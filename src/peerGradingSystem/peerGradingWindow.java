@@ -21,9 +21,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-//import peerGradingSystem.userInputSelectionWindow;
-
-
 
 public class peerGradingWindow extends JPanel {
 	//    private boolean DEBUG = false;
@@ -43,13 +40,12 @@ public class peerGradingWindow extends JPanel {
 
 		//Fiddle with the Sport column's cell editors/renderers.
 		setUpMarksColumn(table, table.getColumnModel().getColumn(1));
-
+		setUpMarksColumn(table, table.getColumnModel().getColumn(2));
+		setUpMarksColumn(table, table.getColumnModel().getColumn(3));
 		//Add the scroll pane to this panel.
 //		add(scrollPane);
 		JButton submitButton = new JButton("Submit");
-//		Dimension d = new Dimension(30, 30);
 		submitButton.setSize(new Dimension(10, 10));
-//		submitButton.setMargin(new Insets(-10, -10, -10, -10));
 		submitButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -61,11 +57,9 @@ public class peerGradingWindow extends JPanel {
 				
 			}
 		});
-//		add(submitButton);
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
 		add(submitButton, BorderLayout.SOUTH);
-//		add(BorderLayout.PAGE_END, submitButton);
 	}
 
 	public void setUpMarksColumn(JTable table,
@@ -87,7 +81,7 @@ public class peerGradingWindow extends JPanel {
 
 	public class MyTableModel extends AbstractTableModel {
 		private String[] columnNames = {"Name",
-		"Marks","Normalised Marks"};
+		"Professionalism","Meeting Participation","Work Evaluation","Normalised Marks"};
 
 		private List<student> data;// = new ArrayList();
 
@@ -114,33 +108,24 @@ public class peerGradingWindow extends JPanel {
 		}
 
 		public Object getValueAt(int row, int col) {
-			//            return data[row][col];
 			Object temp = null; 
 			if (col == 0) { 
 				temp = data.get(row).getFullName(); 
 			} 
 			else if (col == 1) { 
-				temp = data.get(row).getMarks(); 
-			} 
+				temp = data.get(row).getProfessionalismMarks(); 
+			}
 			else if (col == 2) { 
+				temp = data.get(row).getParticipationMarks(); 
+			}
+			else if (col == 3) { 
+				temp = data.get(row).getWorkEvaluationMarks(); 
+			}
+			else if (col == 4) { 
 				temp = data.get(row).getNormalisedMarks(); 
 			}
-			//            else if (col == 2) { 
-			//               temp = new Double(data.get(row).getPrice()); 
-			//            } 
 			return temp; 
 		} 
-		//        }
-
-		//        /*
-		//         * JTable uses this method to determine the default renderer/
-		//         * editor for each cell.  If we didn't implement this method,
-		//         * then the last column would contain text ("true"/"false"),
-		//         * rather than a check box.
-		//         */
-		//        public Class getColumnClass(int c) {
-		//            return getValueAt(0, c).getClass();
-		//        }
 
 		/*
 		 * Don't need to implement this method unless your table's
@@ -149,7 +134,7 @@ public class peerGradingWindow extends JPanel {
 		public boolean isCellEditable(int row, int col) {
 			//Note that the data/cell address is constant,
 			//no matter where the cell appears onscreen.
-			if (col  == 1) {
+			if (col  == 1||col  == 2||col  == 3) {
 				return true;
 			} else {
 				return false;
@@ -161,45 +146,32 @@ public class peerGradingWindow extends JPanel {
 		 * data can change.
 		 */
 		public void setValueAt(Object value, int row, int col) {
-			//            if (DEBUG) {
 			System.out.println("Setting value at " + row + "," + col
 					+ " to " + value
 					+ " (an instance of "
 					+ value.getClass() + ")");
-			//            }
-
-			//            data[row][col] = value;
-//			Object temp = null; 
 			if (col == 0) { 
 				data.get(row).setFullName((String)value); 
 			} 
 			else if (col == 1) { 
-				data.get(row).setMarks((int)value); 
+				data.get(row).setProfessionalismMarks((int)value); 
+			}
+			else if (col == 1) { 
+				data.get(row).setProfessionalismMarks((int)value); 
 			}
 			else if (col == 2) { 
+				data.get(row).setParticipationMarks((int)value); 
+			}
+			else if (col == 3) { 
+				data.get(row).setWorkEvaluationMarks((int)value); 
+			}
+			else if (col == 4) { 
 				data.get(row).setNormalisedMarks((int)value); 
-			} 
+			}
+			
 			
 			fireTableCellUpdated(row, col);
 
-			//            if (DEBUG) {
-			//                System.out.println("New value of data:");
-			//                printDebugData();
-			//            }
-		}
-
-		private void printDebugData() {
-			int numRows = getRowCount();
-			int numCols = getColumnCount();
-
-			for (int i=0; i < numRows; i++) {
-				System.out.print("    row " + i + ":");
-				for (int j=0; j < numCols; j++) {
-					//                    System.out.print("  " + data[i][j]);
-				}
-				System.out.println();
-			}
-			System.out.println("--------------------------");
 		}
 	}
 
@@ -217,7 +189,7 @@ public class peerGradingWindow extends JPanel {
 		//Create and set up the window.
 		
 		
-		JFrame frame = new JFrame("TableRenderDemo");
+		JFrame frame = new JFrame("Peer Evaluation");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		userInputSelectionWindow currentUserSelectionWindow = new userInputSelectionWindow();
@@ -234,7 +206,6 @@ public class peerGradingWindow extends JPanel {
 		peerGradingWindow newContentPane = new peerGradingWindow(currentList);
 		
 		//Write code to pass the parameters to pane
-//		student aa = newContentPane.new student("Sid",4);
 		newContentPane.setOpaque(true); //content panes must be opaque
 		frame.setContentPane(newContentPane);
 

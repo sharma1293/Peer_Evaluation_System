@@ -2,29 +2,51 @@ package peerGradingSystem;
 
 public class student {
 	private String fullName;
-	private Integer marks;
+	private Integer ProfessionalisMarks;
+	private Integer ParticipationMarks;
+	private Integer WorkEvaluationMarks;
+	
+	
 	private float normalisedMarks = 0;
 
-	public student(String fullName, Integer marks){
+	public student(String fullName, Integer ProfessionalisMarks,Integer ParticipationMarks,Integer WorkEvaluationMarks){
 		this.fullName = fullName;
-		this.marks = marks;
+		this.ProfessionalisMarks = ProfessionalisMarks;
+		this.ParticipationMarks = ParticipationMarks;
+		this.WorkEvaluationMarks = WorkEvaluationMarks;
 	}
 	
 	
-	public Integer getMarks() {
-		return marks;
+	public Integer getProfessionalismMarks() {
+		return ProfessionalisMarks;
+	}
+	
+	public Integer getParticipationMarks() {
+		return ParticipationMarks;
+	}
+	
+	public Integer getWorkEvaluationMarks() {
+		return WorkEvaluationMarks;
 	}
 	
 	public float getNormalisedMarks() {
 		return normalisedMarks;
 	}
 	
-	public void setMarks(Integer marks) {
-		this.marks = marks;
+	public void setProfessionalismMarks(Integer marks) {
+		this.ProfessionalisMarks = marks;
 	}
 	
 	public void setNormalisedMarks(float normalisedMarks) {
 		this.normalisedMarks = normalisedMarks;
+	}
+	
+	public void setParticipationMarks(Integer participationMarks) {
+		ParticipationMarks = participationMarks;
+	}
+	
+	public void setWorkEvaluationMarks(Integer workEvaluationMarks) {
+		WorkEvaluationMarks = workEvaluationMarks;
 	}
 	public String getFullName() {
 		return fullName;

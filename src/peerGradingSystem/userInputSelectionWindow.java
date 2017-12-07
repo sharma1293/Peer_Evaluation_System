@@ -8,10 +8,7 @@ public class userInputSelectionWindow {
 //	public class userSelection{
 		private int numTeammatesSelected;
 		private boolean boolPreviousScores;
-//		public userSelection(int numTeammatesSelected,boolean boolPreviousScores){
-//			this.numTeammatesSelected = numTeammatesSelected;
-//			this.boolPreviousScores = boolPreviousScores;
-//		}
+
 		public int getNumTeammatesSelected() {
 			return numTeammatesSelected;
 		}
@@ -42,11 +39,7 @@ public class userInputSelectionWindow {
 			this.boolPreviousScores = ((yesNoOptions[comboBoxPreviousScores.getSelectedIndex()].equalsIgnoreCase("Yes"))? true:false);
 			this.numTeammatesSelected = (int)teamMateOptions[comboBoxNumberOfTeamMates.getSelectedIndex()];
 
-			
-//			currentUserSelection = new userSelection(numTeammates, trueFalse);
-			
-			// = new userSelection((teamMateOptions[comboBoxNumberOfTeamMates.getSelectedIndex()]),trueFalse );
-
+	
 		} else {
 			System.out.println("User input selection canceled");
 			//Here system should either exit or it should be in a loop.
