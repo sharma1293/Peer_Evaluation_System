@@ -17,6 +17,9 @@ public class normaliseMarks {
 			currentMarks.add(currentStudents.get(i).getProfessionalismMarks()+currentStudents.get(i).getParticipationMarks()+currentStudents.get(i).getWorkEvaluationMarks());
 			totalMarks = totalMarks+(int)currentMarks.get(i);
 		}
+		if(totalMarks == 0){
+			
+		}
 		for(int i= 0; i<currentStudents.size(); i++){
 			currentStudents.get(i).setNormalisedMarks(((float)currentMarks.get(i))/totalMarks);
 			System.out.println("The value has been changed to:"+ currentStudents.get(i).getNormalisedMarks());
