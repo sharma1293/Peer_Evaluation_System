@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 //import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +51,9 @@ public class peerGradingWindow extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-				currentList.calculateNormalisedMarks();
+				ArrayList<student> normalisedList;
+				normalisedList = normaliseMarks.calculateNormalisedMarks(currentList.getStudentsList());
+				currentList.setStudentsList(normalisedList);
 				currentModel.fireTableDataChanged();
 				
 			}
