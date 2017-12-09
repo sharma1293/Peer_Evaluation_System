@@ -43,7 +43,6 @@ public class peerGradingWindow extends JPanel {
 		setUpMarksColumn(table, table.getColumnModel().getColumn(2));
 		setUpMarksColumn(table, table.getColumnModel().getColumn(3));
 		//Add the scroll pane to this panel.
-//		add(scrollPane);
 		JButton submitButton = new JButton("Submit");
 		submitButton.setSize(new Dimension(10, 10));
 		submitButton.addActionListener(new ActionListener() {
@@ -195,10 +194,11 @@ public class peerGradingWindow extends JPanel {
 		userInputSelectionWindow currentUserSelectionWindow = new userInputSelectionWindow();
 		boolean previousValues = currentUserSelectionWindow.getBoolPreviousScores();
 		int numTeamates = currentUserSelectionWindow.getNumTeammatesSelected();
+		String studentNames[] = {"A","B","C","D","E","F","G"};
 		studentList currentList = new studentList();
 		//Initialize the data
 //		initializeGrades()
-		currentList.initStudentList(numTeamates, previousValues);
+		currentList.initStudentList(numTeamates, previousValues,studentNames);
 		
 		
 		//Create and set up the content pane.

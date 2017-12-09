@@ -43,7 +43,7 @@ public class userInputSelectionWindow {
 		} else {
 			System.out.println("User input selection canceled");
 			//Here system should either exit or it should be in a loop.
-			//		    System.exit();
+					    System.exit(0);
 		}
 //		return ;
 	}
