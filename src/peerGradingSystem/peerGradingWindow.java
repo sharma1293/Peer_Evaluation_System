@@ -22,11 +22,17 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-
+/**
+ * This is the main class which generates the main frame for the GUI
+ * @author Group 1
+ *
+ */
 public class peerGradingWindow extends JPanel {
-	//    private boolean DEBUG = false;
 
-
+	/**
+	 * This is the constructor for the peerGradingWindow class which creates a JFrame
+	 * @param currentList This is the list of the all current students
+	 */
 	public peerGradingWindow(studentList currentList) {
 		super(new GridLayout(2,0));
 
@@ -63,6 +69,11 @@ public class peerGradingWindow extends JPanel {
 		add(submitButton, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * This method is used to add drop-down functionality into the given column
+	 * @param table The peer grading table displayed
+	 * @param marksColumn The column for which we add the dro
+	 */
 	public void setUpMarksColumn(JTable table,
 			TableColumn marksColumn) {
 		//Set up the editor for the sport cells.
@@ -78,17 +89,25 @@ public class peerGradingWindow extends JPanel {
 		marksColumn.setCellRenderer(renderer);
 	}
 
-
-
+/**
+ * This table model creates a custom table model to extend functionality for the requirement
+ * @author Group 1
+ *
+ */
 	public class MyTableModel extends AbstractTableModel {
 		private String[] columnNames = {"Name",
 		"Professionalism","Meeting Participation","Work Evaluation","Normalised Marks"};
 
 		private List<student> data;// = new ArrayList();
 
+		/**
+		 * This is the constructor which sets the data model
+		 * @param currentList List of students for which the data needs to be displayed
+		 */
 		public MyTableModel(studentList currentList){
 			data = currentList.getStudentsList();
 		}
+		
 		public int getColumnCount() {
 			return columnNames.length;
 		}
@@ -108,6 +127,9 @@ public class peerGradingWindow extends JPanel {
 			return columnNames[col];
 		}
 
+		/**
+		 * Get the values for respective row-column from the table
+		 */
 		public Object getValueAt(int row, int col) {
 			Object temp = null; 
 			if (col == 0) { 
@@ -128,9 +150,8 @@ public class peerGradingWindow extends JPanel {
 			return temp; 
 		} 
 
-		/*
-		 * Don't need to implement this method unless your table's
-		 * editable.
+		/**
+		 * This method decides the editable cells
 		 */
 		public boolean isCellEditable(int row, int col) {
 			//Note that the data/cell address is constant,
@@ -142,9 +163,8 @@ public class peerGradingWindow extends JPanel {
 			}
 		}
 
-		/*
-		 * Don't need to implement this method unless your table's
-		 * data can change.
+		/**
+		 * Set the value for respective row-column in table
 		 */
 		public void setValueAt(Object value, int row, int col) {
 			System.out.println("Setting value at " + row + "," + col
@@ -182,13 +202,10 @@ public class peerGradingWindow extends JPanel {
 
 
 	/**
-	 * Create the GUI and show it.  For thread safety,
-	 * this method should be invoked from the
-	 * event-dispatching thread.
+	 * Create the GUI and show it. 
 	 */
 	private static void createAndShowGUI() {
 		//Create and set up the window.
-		
 		
 		JFrame frame = new JFrame("Peer Evaluation");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -198,10 +215,7 @@ public class peerGradingWindow extends JPanel {
 		int numTeamates = currentUserSelectionWindow.getNumTeammatesSelected();
 		String studentNames[] = {"A","B","C","D","E","F","G"};
 		studentList currentList = new studentList();
-		//Initialize the data
-//		initializeGrades()
 		currentList.initStudentList(numTeamates, previousValues,studentNames);
-		
 		
 		//Create and set up the content pane.
 		
@@ -216,9 +230,11 @@ public class peerGradingWindow extends JPanel {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * This is the main function for the GUI application
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		//Schedule a job for the event-dispatching thread:
-		//creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				createAndShowGUI();

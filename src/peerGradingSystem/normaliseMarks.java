@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ * The class contains the normalized calculation method
  * @author Group 1
  *
  */
@@ -26,8 +26,7 @@ public class normaliseMarks {
 				currentStudents.get(i).setNormalisedMarks(0);
 			}
 			else{
-				currentStudents.get(i).setNormalisedMarks(((float)currentMarks.get(i))/totalMarks);
-					
+				currentStudents.get(i).setNormalisedMarks(((float)currentMarks.get(i))/totalMarks);		
 			}
 			System.out.println("The value has been changed to:"+ currentStudents.get(i).getNormalisedMarks());
 		}

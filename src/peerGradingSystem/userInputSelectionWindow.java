@@ -3,9 +3,13 @@ package peerGradingSystem;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
+/**
+ * This is the class to implement the dialog box for user selection
+ * @author Group 1
+ *
+ */
 public class userInputSelectionWindow {
 
-//	public class userSelection{
 		private int numTeammatesSelected;
 		private boolean boolPreviousScores;
 
@@ -16,14 +20,13 @@ public class userInputSelectionWindow {
 		public boolean getBoolPreviousScores(){
 			return boolPreviousScores;
 		}
-		
-//	}
 
-
+/**
+ * This is the constructor method to invoke the dialog box
+ */
 	public userInputSelectionWindow(){
 		Integer teamMateOptions[] = {2,3,4,5,6,7};
 		String yesNoOptions[] = {"Yes","No"};
-//		userSelection currentUserSelection = null;
 		JComboBox<Integer> comboBoxNumberOfTeamMates = new JComboBox<Integer>(teamMateOptions);
 		JComboBox<String> comboBoxPreviousScores = new JComboBox<String>(yesNoOptions);
 
@@ -42,10 +45,9 @@ public class userInputSelectionWindow {
 	
 		} else {
 			System.out.println("User input selection canceled");
-			//Here system should either exit or it should be in a loop.
+			//Here system should either exit.
 					    System.exit(0);
 		}
-//		return ;
 	}
 
 }

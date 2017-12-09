@@ -7,11 +7,16 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 /**
- * The class will test the functionality of the normalisation method
+ * The class will test the functionality of the normalization method
  * @author Group 1
  *
  */
 public class normaliseMarksTest {
+	
+	/**
+	 * This test case is to check if the normalized marks have the correct values 
+	 */
+	
 	@Test
 	public void testNormalisedCalculation() {
 		
@@ -32,6 +37,10 @@ public class normaliseMarksTest {
 		assertEquals("Normalisation correct for fourth person ",(float) 0.29, (float)marks.get(3).getNormalisedMarks(),(float) 0.05);
 		
 	}
+	
+	/**
+	 * This test case is to check if the sum of the normalized marks equals to 1
+	 */
 	@Test
 	public void testSumOfNormalisedScore(){
 		studentList currentStudentList = null;
@@ -39,7 +48,7 @@ public class normaliseMarksTest {
 		currentStudentList = initStudentObject();
 		marks = normaliseMarks.calculateNormalisedMarks(currentStudentList.getStudentsList());
 		//The marks object should not be null 
-		assertNotNull("Object shouldbe not null", marks);
+		assertNotNull("Object should be not null", marks);
 		//Sum should be equal to 1
 		System.out.println(marks.get(0).getNormalisedMarks());
 		assertEquals(1, (int)(marks.get(0).getNormalisedMarks()+marks.get(1).getNormalisedMarks()+marks.get(2).getNormalisedMarks()+marks.get(3).getNormalisedMarks()));
